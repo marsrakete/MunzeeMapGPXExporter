@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Munzee Map GPX Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+  <script type="module" src="popup.mjs"></script>
+</head>
+<body>
+  <h1>Munzee Map GPX Exporter</h1>
+  <button type="button" id="collect">Pins aus Karte übernehmen</button>
+  <p role="status" id="status">Karte wird geprüft …</p>
+  <p id="warning" hidden></p>
+  <p id="empty-count" hidden></p>
+  <details id="preview" hidden>
+    <summary id="count"></summary>
+    <div class="pin-table">
+      <table aria-labelledby="count">
+        <thead><tr><th scope="col">Name</th><th scope="col">Breite</th><th scope="col">Länge</th></tr></thead>
+        <tbody id="pins"></tbody>
+      </table>
+    </div>
+  </details>
+  <template id="pin-row">
+    <tr><td></td><td></td><td></td></tr>
+  </template>
+  <fieldset id="tour" hidden disabled>
+    <legend>GPX-Track für Komoot</legend>
+    <p id="track-start" role="status"></p>
+    <p id="track-help">Mit Umschalt-Klick auf der Karte fügst du Stopps hinzu oder entfernst sie. Die Reihenfolge wird nach Luftlinie berechnet.</p>
+    <details id="track-selection" hidden>
+      <summary id="track-count"></summary>
+      <ul id="track-stops"></ul>
+    </details>
+    <label for="tour-mode">Streckenform</label>
+    <select id="tour-mode">
+      <option value="round">Rundkurs</option>
+      <option value="open">Ende am entferntesten Munzee</option>
+    </select>
+    <button type="button" id="track" aria-describedby="track-help" disabled>GPX-Track herunterladen</button>
+  </fieldset>
+  <footer>
+    <button type="button" id="gpx" disabled>GPX herunterladen</button>
+    <button type="button" id="csv" disabled>CSV herunterladen</button>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Munzee Map GPX Exporter",
+  "description": "Exportiert sichtbare Munzees als GPX oder CSV und erstellt GPX-Tracks für Komoot.",
+  "version": "0.7.1",
+  "minimum_chrome_version": "111",
+  "permissions": ["declarativeContent"],
+  "background": {
+    "service_worker": "toolbar.js"
+  },
+  "icons": {
+    "16": "icons/pin-16.png",
+    "32": "icons/pin-32.png",
+    "48": "icons/pin-48.png",
+    "128": "icons/pin-128.png"
+  },
+  "action": {
+    "default_state": "disabled",
+    "default_icon": {
+      "16": "icons/pin-16.png",
+      "32": "icons/pin-32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.munzee.com/map",
+        "https://www.munzee.com/map?*",
+        "https://www.munzee.com/map/*"
+      ],
+      "js": [
+        "collector.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.munzee.com/map",
+        "https://www.munzee.com/map?*",
+        "https://www.munzee.com/map/*"
+      ],
+      "js": [
+        "map-view.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
