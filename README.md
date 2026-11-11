@@ -4,9 +4,11 @@ Eine kleine Chrome-Erweiterung, die sichtbare Pins im aktuellen Ausschnitt der [
 
 ## Lokal in Chrome installieren
 
+Die fertige Erweiterung findest du auf GitHub unter [Releases](https://github.com/marsrakete/MunzeeMapGPXExporter/releases). Lade dort `munzee-map-gpx-exporter.zip` herunter und entpacke sie. GitHub Actions stellt die ZIP auch bei erfolgreichen Builds unter **Artifacts** bereit. Der Dateiname bleibt bei jeder Version gleich.
+
 1. Öffne `chrome://extensions/` in Chrome und aktiviere den **Entwicklermodus**.
 2. Wähle **Entpackte Erweiterung laden** (*Load unpacked*).
-3. Wähle den Projektordner **extension**, in dem die `manifest.json` liegt. Ein Build ist nicht nötig. Die Erweiterung benötigt Chrome 111 oder neuer.
+3. Wähle den entpackten Ordner mit der `manifest.json`. Wenn du mit einer lokalen Kopie des Repositorys arbeitest, wähle den Projektordner **extension**. Die Erweiterung benötigt Chrome 111 oder neuer.
 4. Öffne die Munzee-Karte und melde dich dort selbst an. Lade die Karte einmal neu, falls sie bereits geöffnet war oder du über die Seitennavigation auf die Karte gelangt bist.
 5. Wähle einen Kartenausschnitt und warte, bis die Pins geladen sind. Öffne das Erweiterungssymbol und klicke auf **Pins aus Karte übernehmen**. Die Vorschau zeigt die Anzahl, Namen und Koordinaten.
 6. Wähle **GPX herunterladen** oder **CSV herunterladen**. Wenn du den Ausschnitt änderst, öffne das Popup erneut oder klicke auf **Pins aus Karte übernehmen**. Die Vorschau wird durch den aktuellen Ausschnitt ersetzt.
@@ -60,6 +62,8 @@ Die GPX-1.1-Datei enthält pro Pin einen `<wpt>` mit Namen und Munzee-URL in `<n
 - Wenn die Vorschau leer bleibt, warte, bis die Karte fertig geladen ist. Prüfe die Anmeldung und Hinweise der Karte zur Zoomstufe. Eine Änderung der Kartenimplementierung kann eine Anpassung des Kartenadapters erfordern.
 
 ## Datenfluss und Dateien
+
+Für eine neue Version passe die Versionsnummer in `extension/manifest.json` an und pushe einen passenden Tag wie `v0.7.1`. Nach erfolgreichen Tests veröffentlicht GitHub Actions das Release mit der installierbaren ZIP.
 
 Die Karte lädt Teilbereiche und übergibt die gefilterten Pins als GeoJSON an ihre MapLibre-Ebene `icons`. Der Adapter findet die bestehende Karteninstanz über die React-Referenz am Kartencontainer und liest die gerenderten Features per `queryRenderedFeatures`. Name, URL und Koordinaten stammen aus den Eigenschaften dieser Pins.
 
